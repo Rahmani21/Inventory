@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import CustomUser, Roles
+from .models import CustomUser, Roles, UserActivities
 
 class CreateUserSerializer(serializers.Serializer):
     email = serializers.EmailField()
@@ -19,8 +19,12 @@ class UpdatePasswordSerializer(serializers.Serializer):
     password = serializers.CharField()
 
 
-class CustomUserSerializer(serializers.Serializer):
+class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
         exclude = ("password",)
 
+class UserActivitiesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserActivities
+        fields = ("__all__")
